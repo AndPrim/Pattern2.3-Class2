@@ -18,7 +18,6 @@ public class AvtoTestCard {
         void setup() {
             open("http://localhost:9999");
         }
-        TestsDataGenerator teDaGe = new TestsDataGenerator();
 
         @Test
         @DisplayName("Should successfully login with active registered user")
@@ -35,8 +34,8 @@ public class AvtoTestCard {
         @DisplayName("Should get error message if login with not registered user")
         void shouldGetErrorIfNotRegisteredUser() {
 //            var notRegisteredUser = TestsDataGenerator.Registration.getUser("active");
-            $("[data-test-id='login'] input").setValue(teDaGe.getRandomLogin());
-            $("[data-test-id='password'] input").setValue(teDaGe.getRandomPassword());
+            $("[data-test-id='login'] input").setValue(TestsDataGenerator.getRandomLogin());
+            $("[data-test-id='password'] input").setValue(TestsDataGenerator.getRandomPassword());
             $("button.button").click();
             $("[data-test-id='error-notification'] .notification__content")
                     .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"), Duration.ofSeconds(15))
@@ -59,7 +58,7 @@ public class AvtoTestCard {
         @DisplayName("Should get error message if login with wrong login")
         void shouldGetErrorIfWrongLogin() {
             var registeredUser = TestsDataGenerator.Registration.getRegisteredUser("active");
-            $("[data-test-id='login'] input").setValue(teDaGe.getRandomLogin());
+            $("[data-test-id='login'] input").setValue(TestsDataGenerator.getRandomLogin());
             $("[data-test-id='password'] input").setValue(registeredUser.getPassword());
             $("button.button").click();
             $("[data-test-id='error-notification'] .notification__content")
@@ -72,7 +71,7 @@ public class AvtoTestCard {
         void shouldGetErrorIfWrongPassword() {
             var registeredUser = TestsDataGenerator.Registration.getRegisteredUser("active");
             $("[data-test-id='login'] input").setValue(registeredUser.getLogin());
-            $("[data-test-id='password'] input").setValue(teDaGe.getRandomPassword());
+            $("[data-test-id='password'] input").setValue(TestsDataGenerator.getRandomPassword());
             $("button.button").click();
             $("[data-test-id='error-notification'] .notification__content")
                     .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"), Duration.ofSeconds(15))

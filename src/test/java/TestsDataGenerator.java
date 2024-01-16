@@ -3,6 +3,8 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import java.util.Locale;
 
@@ -19,7 +21,7 @@ public class TestsDataGenerator {
             .build();
 
 
-    TestsDataGenerator() {
+    private TestsDataGenerator() {
     }
 
     private static void sendRequest(RegistrationUser user) {
@@ -55,4 +57,13 @@ public class TestsDataGenerator {
             return registered;
         }
     }
+}
+
+@Data
+@AllArgsConstructor
+class RegistrationUser {
+    String login;
+    String password;
+
+    String status;
 }
